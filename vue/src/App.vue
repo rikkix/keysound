@@ -15,7 +15,7 @@
         Designed and built with <span class="text-red-500">♥</span> by <a class="hover:underline text-gray-600"
                                                                           href="https://iochen.com/">Richard Chen</a>.
       </div>
-      <div><span> Link: <a href="https://www.keyfc.net/">KeyFC</a> </span></div>
+      <div><span> Link: <a class="hover:underline text-gray-600" href="https://www.keyfc.net/">KeyFC</a> </span></div>
     </div>
   </div>
 </template>
