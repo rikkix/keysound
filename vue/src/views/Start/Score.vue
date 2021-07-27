@@ -40,7 +40,9 @@
       }
     },
     mounted() {
-      console.log(this.$route)
+      if (this.quizScore == null || this.quizInfo == null) {
+        this.$router.push({name: 'Home'})
+      }
     }
   }
 </script>
