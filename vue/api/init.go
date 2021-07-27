@@ -37,7 +37,7 @@ func init() {
 	}
 
 	var err error
-	musicList, err = ParseList("list.csv")
+	musicList, err = ParseList("list_data.csv")
 	if err != nil {
 		log.Fatalln(err)
 	}
