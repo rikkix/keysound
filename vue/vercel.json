@@ -6,16 +6,5 @@
     "api/new.go": {
       "includeFiles": "list_data.csv"
     }
-  },
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json; charset=UTF-8"
-        }
-      ]
-    }
-  ]
+  }
 }

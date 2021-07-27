@@ -33,6 +33,7 @@ func NewQuizHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(500)
 		return
 	}
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	err = json.NewEncoder(w).Encode(NewResponse{
 		ID:     id,
 		Base:   os.Getenv("BASE_URL"),
