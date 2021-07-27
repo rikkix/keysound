@@ -27,6 +27,7 @@ func ParseList(path string) (MusicList, error) {
 		return MusicList{}, err
 	}
 	reader := csv.NewReader(bytes.NewReader(file))
+	//reader.LazyQuotes = true
 	for {
 		record, err := reader.Read()
 		if err != nil {

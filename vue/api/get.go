@@ -10,7 +10,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/mongo"
 
-	"github.com/iochen/keysound/api/keysound"
+	"github.com/iochen/keysound/vue/keysound"
 )
 
 func GetQuizHandler(w http.ResponseWriter, r *http.Request) {

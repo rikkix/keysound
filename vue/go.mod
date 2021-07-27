@@ -1,4 +1,4 @@
-module github.com/iochen/keysound/api
+module github.com/iochen/keysound/vue
 
 go 1.16
 

@@ -9,7 +9,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 
-	"github.com/iochen/keysound/api/keysound"
+	"github.com/iochen/keysound/vue/keysound"
 )
 
 type NewResponse struct {
