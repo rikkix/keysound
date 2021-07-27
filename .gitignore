@@ -1,0 +1,7 @@
+data/*
+.idea/*
+vue/dist/*
+vue/node_modules/*
+vue/public/data/*
+api/.serve/.serve
+api/.serve/serve
