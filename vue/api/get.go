@@ -38,7 +38,7 @@ func GetQuizHandler(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(404)
 			return
 		}
-		log.Println(err)
+		log.Println("MONGO ERROR:", err, r.PostForm.Encode(), r.FormValue("id"))
 		w.WriteHeader(500)
 		return
 	}
