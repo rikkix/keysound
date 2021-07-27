@@ -5,3 +5,5 @@ vue/node_modules/*
 vue/public/data/*
 api/.serve/.serve
 api/.serve/serve
+vue/api/.serve/.serve
+vue/api/.serve/serve
