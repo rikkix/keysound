@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/get.go": {
+      "includeFiles": "list_data.csv"
+    },
+    "api/new.go": {
+      "includeFiles": "list_data.csv"
+    }
+  }
+}
