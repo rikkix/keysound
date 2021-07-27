@@ -56,10 +56,8 @@ func (mp *MusicPiece) ToResponse(choices Choices) *MusicPieceResponse {
 	}
 	for {
 		indexes := randomIndexes(3, len(choices)-1)
-		for i := 0; i < len(indexes); i++ {
-			if choices[indexes[i]] == mpr.Name {
-				continue
-			}
+		if nameDuplicated(choices, indexes, mpr.Name) {
+			continue
 		}
 
 		for i := 0; i < len(indexes); i++ {
@@ -68,6 +66,15 @@ func (mp *MusicPiece) ToResponse(choices Choices) *MusicPieceResponse {
 		break
 	}
 	return mpr
+}
+
+func nameDuplicated(choices Choices, indexes []int, name string) bool {
+	for i := 0; i < len(indexes); i++ {
+		if choices[indexes[i]] == name {
+			return true
+		}
+	}
+	return false
 }
 
 func (pl PieceList) PieceListResponse(choices Choices) PieceListResponse {
