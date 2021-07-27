@@ -1,4 +1,4 @@
-package handler
+package keysound
 
 import (
 	"context"
@@ -6,7 +6,6 @@ import (
 	"log"
 	"math/rand"
 	"os"
-	"strconv"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -16,33 +15,22 @@ import (
 const PROJECT = "keysound"
 const COLLECTION = "quiz"
 
-var lastID = 1000
-var client *mongo.Client
-var musicList MusicList
-var allChoices Choices
+var DefaultClient *mongo.Client
+var DefaultMusicList MusicList
+var DefaultChoices Choices
 
 func init() {
-	if len(os.Getenv("LAST_ID")) != 0 {
-		n, err := strconv.Atoi("LAST_ID")
-		if err != nil {
-			log.Fatalln(err)
-		}
-		fmt.Println("setting last id to:", n)
-		lastID = n
-	}
-	fmt.Println("using last id:", lastID)
-
 	if os.Getenv("SKIP_DB") != "true" {
 		InitDB(os.Getenv("MONGO_URI"))
 	}
 
 	var err error
-	musicList, err = ParseList("list_data.csv")
+	DefaultMusicList, err = ParseList("list_data.csv")
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	allChoices = musicList.Choices()
+	DefaultChoices = DefaultMusicList.Choices()
 
 	rand.Seed(time.Now().UnixNano())
 }
@@ -50,14 +38,14 @@ func init() {
 func InitDB(uri string) {
 	fmt.Println("Init...")
 	var err error
-	client, err = mongo.NewClient(options.Client().ApplyURI(uri))
+	DefaultClient, err = mongo.NewClient(options.Client().ApplyURI(uri))
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// connect
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	err = client.Connect(ctx)
+	err = DefaultClient.Connect(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -111,8 +99,4 @@ func InitDB(uri string) {
 	//}
 
 	fmt.Println("Init finished")
-}
-
-func StorageBase() string {
-	return os.Getenv("STORAGE_BASE")
 }

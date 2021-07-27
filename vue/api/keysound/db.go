@@ -1,4 +1,4 @@
-package handler
+package keysound
 
 import (
 	"context"
@@ -15,7 +15,7 @@ type dbPLR struct {
 
 func MongoNewQuiz(plr PieceListResponse) (string, error) {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	result, err := client.Database(PROJECT).Collection(COLLECTION).
+	result, err := DefaultClient.Database(PROJECT).Collection(COLLECTION).
 		InsertOne(ctx,
 			dbPLR{
 				Quiz: plr,
@@ -37,7 +37,7 @@ func MongoGetQuiz(id string) (PieceListResponse, error) {
 	}
 
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	result := client.Database(PROJECT).Collection(COLLECTION).
+	result := DefaultClient.Database(PROJECT).Collection(COLLECTION).
 		FindOne(ctx, bson.M{"_id": objectID})
 	dbplr := dbPLR{}
 	err = result.Decode(&dbplr)

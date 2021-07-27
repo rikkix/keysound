@@ -4,17 +4,18 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"math/rand"
 	"net/http"
 	"os"
 
 	"go.mongodb.org/mongo-driver/bson"
+
+	"github.com/iochen/keysound/api/keysound"
 )
 
 type NewResponse struct {
-	ID     string            `json:"id"`
-	Base   string            `json:"base"`
-	Pieces PieceListResponse `json:"pieces"`
+	ID     string                     `json:"id"`
+	Base   string                     `json:"base"`
+	Pieces keysound.PieceListResponse `json:"pieces"`
 }
 
 func NewQuizHandler(w http.ResponseWriter, r *http.Request) {
@@ -25,8 +26,8 @@ func NewQuizHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(400)
 		return
 	}
-	plr := newList().RandomPieceList().PieceListResponse(allChoices)
-	id, err := MongoNewQuiz(plr)
+	plr := keysound.NewList().RandomPieceList().PieceListResponse(keysound.DefaultChoices)
+	id, err := keysound.MongoNewQuiz(plr)
 	if err != nil {
 		log.Println(err)
 		w.WriteHeader(500)
@@ -46,48 +47,4 @@ func NewQuizHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(500)
 		return
 	}
-}
-
-func newList() MusicList {
-	ml := MusicList{}
-	indexes := randomIndexes(10, len(musicList)-1)
-	for i := 0; i < len(indexes); i++ {
-		ml = append(ml, musicList[indexes[i]])
-	}
-	return ml
-}
-
-func randomIndexes(n, b int) []int {
-	var il []int
-	if n > b+1 {
-		for i := 0; i <= b; i++ {
-			il = append(il, i)
-		}
-		return il
-	}
-	for {
-		in := randomIndex(b)
-		if exist(in, il) {
-			continue
-		}
-		il = append(il, in)
-		if len(il) >= n {
-			break
-		}
-	}
-	return il
-}
-
-func exist(n int, l []int) bool {
-	for i := 0; i < len(l); i++ {
-		if l[i] == n {
-			return true
-		}
-	}
-	return false
-}
-
-// [0,b]
-func randomIndex(b int) int {
-	return rand.Intn(b + 1)
 }

@@ -1,6 +1,9 @@
-package handler
+package keysound
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+)
 
 type MusicPiece struct {
 	MusicItem  *MusicItem
@@ -85,4 +88,48 @@ func removeDuplicateStr(strSlice []string) []string {
 		}
 	}
 	return list
+}
+
+func NewList() MusicList {
+	ml := MusicList{}
+	indexes := randomIndexes(10, len(DefaultMusicList)-1)
+	for i := 0; i < len(indexes); i++ {
+		ml = append(ml, DefaultMusicList[indexes[i]])
+	}
+	return ml
+}
+
+func randomIndexes(n, b int) []int {
+	var il []int
+	if n > b+1 {
+		for i := 0; i <= b; i++ {
+			il = append(il, i)
+		}
+		return il
+	}
+	for {
+		in := randomIndex(b)
+		if exist(in, il) {
+			continue
+		}
+		il = append(il, in)
+		if len(il) >= n {
+			break
+		}
+	}
+	return il
+}
+
+func exist(n int, l []int) bool {
+	for i := 0; i < len(l); i++ {
+		if l[i] == n {
+			return true
+		}
+	}
+	return false
+}
+
+// [0,b]
+func randomIndex(b int) int {
+	return rand.Intn(b + 1)
 }
