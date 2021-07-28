@@ -31,7 +31,6 @@ func GetQuizHandler(w http.ResponseWriter, r *http.Request) {
 
 	id := r.PostForm.Get("id")
 	id = strings.TrimSpace(id)
-	fmt.Println(id)
 	plr, err := keysound.MongoGetQuiz(id)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
