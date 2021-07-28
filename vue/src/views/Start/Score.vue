@@ -30,7 +30,8 @@
             <td @click="playPiece(data.path)" class="w-1/12  border border-gray-900 cursor-pointer">
               {{ index+1 }}
             </td>
-            <td @click="playFull(data.full)" class="w-11/12 border border-gray-900 cursor-pointer">
+            <td :class="failedQuiz.includes(index+1)?'bg-red-300':'bg-green-300'" @click="playFull(data.full)"
+                class="w-11/12 py-2 border border-gray-500 cursor-pointer">
               {{ data.title }}
             </td>
           </tr>
@@ -47,7 +48,7 @@
 
   export default {
     name: "Score",
-    props: ['quizScore', 'quizInfo'],
+    props: ['quizScore', 'quizInfo', 'failedQuiz'],
     components: {
       ProgressBar
     },

@@ -40,7 +40,8 @@
         currentProgress: 0,
         isEnd: false,
         each: 100 / this.quizInfo.pieces.length,
-        score: 0
+        score: 0,
+        failedQuiz: []
       }
     },
     methods: {
@@ -53,6 +54,9 @@
         this.currentProgress = Math.ceil(currentTime * 100 / duration)
       },
       nextQuiz(score) {
+        if (score <= 0) {
+          this.failedQuiz.push(this.currentQuizID)
+        }
         this.score += score;
         audio.pause();
         audio.removeEventListener("timeupdate", this.updateProgress);
@@ -63,7 +67,8 @@
             name: 'Score',
             params: {
               quizInfo: this.quizInfo,
-              quizScore: this.score
+              quizScore: this.score,
+              failedQuiz: this.failedQuiz
             }
           });
           return
