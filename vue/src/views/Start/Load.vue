@@ -53,7 +53,7 @@
               'Content-Type': 'audio/mp3'
             }
           }).then((data) => {
-            console.log(data);
+            // console.log(data);
             var blob = new Blob([data.data], {
               type: 'audio/mp3'
             });
