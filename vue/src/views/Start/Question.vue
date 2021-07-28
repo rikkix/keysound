@@ -81,6 +81,9 @@
         this.currentQuizID++
       }
     },
+    destroyed() {
+      audio.pause()
+    },
     mounted() {
       if (this.quizInfo == null) {
         this.$router.push({name: 'Home'})

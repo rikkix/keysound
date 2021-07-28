@@ -104,6 +104,9 @@
       mathCeil(i) {
         return Math.ceil(i)
       }
+    },
+    destroyed() {
+      audio.pause()
     }
   }
 </script>
