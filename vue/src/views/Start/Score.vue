@@ -24,10 +24,10 @@
             <span class="text-xs text-white w-full flex justify-end pr-2">{{currentProgress | mathCeil }}%</span>
           </progress-bar>
         </div>
-        <div>click id/name to play full/quiz audio</div>
-        <table class="border-collapse border border-gray-900 w-full mt-2">
+        <div>click id/name to play quiz/full audio</div>
+        <table class="border-collapse border-2 border-gray-500 w-full mt-2">
           <tr v-for="(data,index) in quizInfo.pieces">
-            <td @click="playPiece(data.path)" class="w-1/12  border border-gray-900 cursor-pointer">
+            <td @click="playPiece(data.path)" class="w-1/12 border border-gray-500 cursor-pointer font-bold">
               {{ index+1 }}
             </td>
             <td :class="failedQuiz.includes(index+1)?'bg-red-300':'bg-green-300'" @click="playFull(data.full)"
